@@ -52,6 +52,6 @@ Primero, clona el repositorio y navega a la carpeta del proyecto. Luego, instala
 
 ```bash
 pip install -r requirements.txt
-
+``` 
 
 [Link a la APP!](https://spa-sales-analysis-davidsoler.streamlit.app/)
