@@ -1,0 +1,13 @@
+Hola Profe, espero se encuentre muy bien!
+Las mejoras realizadas a la ultima versión están publicadas al principio del readme en el repositorio de GitHub. 
+Le adjunto nuevamente los links:
+Link al repo:
+https://github.com/Davoassassin27/SPA---Sales-Analysis-with-Streamlit
+Link a la app:
+https://spa-sales-analysis-davidsoler.streamlit.app/
+
+PD: No se olvide de utilizar el archivo de prueba que se llama "ventas.csv" disponible en la carpeta data.
+
+
+Saludos,
+David

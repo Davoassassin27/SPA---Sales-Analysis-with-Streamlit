@@ -46,7 +46,7 @@ def optimizar_arima(datos_producto_agrupado, max_p=3, max_d=2, max_q=3):
 def realizar_prediccion(datos_producto, modelo_prediccion, num_meses):
     """Realiza predicción en base al modelo seleccionado, optimizando parámetros si es necesario."""
 
-    datos_producto_agrupado = datos_producto.resample('M').sum()
+    datos_producto_agrupado = datos_producto.resample('ME').sum()
     datos_producto_agrupado['MesNumerico'] = (datos_producto_agrupado.index.year - datos_producto_agrupado.index.year.min()) * 12 + datos_producto_agrupado.index.month
 
     if modelo_prediccion == "Regresión Lineal":
@@ -55,20 +55,20 @@ def realizar_prediccion(datos_producto, modelo_prediccion, num_meses):
         modelo = LinearRegression().fit(X, y)
         meses_futuros = np.array([X['MesNumerico'].max() + i for i in range(1, num_meses + 1)]).reshape(-1, 1)
         predicciones = modelo.predict(meses_futuros)
-        fechas_futuras = pd.date_range(datos_producto_agrupado.index.max(), periods=num_meses, freq='M')
+        fechas_futuras = pd.date_range(datos_producto_agrupado.index.max(), periods=num_meses, freq='ME')
 
     elif modelo_prediccion == "ARIMA":
         # Optimizar el modelo ARIMA
         modelo_arima, mejor_order = optimizar_arima(datos_producto_agrupado)
         st.write(f"Mejor parámetro ARIMA encontrado: {mejor_order}")
         predicciones = modelo_arima.forecast(steps=num_meses)
-        fechas_futuras = pd.date_range(datos_producto_agrupado.index.max(), periods=num_meses, freq='M')
+        fechas_futuras = pd.date_range(datos_producto_agrupado.index.max(), periods=num_meses, freq='ME')
 
     elif modelo_prediccion == "Holt-Winters":
         # Modelo Holt-Winters con ajuste estacionalidad
         modelo_hw = ExponentialSmoothing(datos_producto_agrupado['Cantidad'], trend='add', seasonal='add', seasonal_periods=12).fit()
         predicciones = modelo_hw.forecast(steps=num_meses)
-        fechas_futuras = pd.date_range(datos_producto_agrupado.index.max(), periods=num_meses, freq='M')
+        fechas_futuras = pd.date_range(datos_producto_agrupado.index.max(), periods=num_meses, freq='ME')
 
     return fechas_futuras, predicciones, datos_producto_agrupado
 
