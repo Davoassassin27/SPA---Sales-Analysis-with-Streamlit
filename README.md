@@ -1,12 +1,14 @@
 # Aplicación de Análisis de Ventas y Predicción de Ventas con Streamlit
 
 >[!NOTE]
-> La ultima version de la app tiene los siguientes agraegados:
+> La última versión de la app tiene los siguientes agraegados:
 > - Modularización de la App
 > - Página de EDA mejorada
 > - Página de inicio mejorada
 > - Backtesting en modelos
 > - Optimización nativa de ARIMA
+> - 'Aqua' Theme por defecto (tema diseñado por autor)
+> - Se puede utilizar datos de manera predeterminada lo que facilita su uso desde Mobile Version
 
 Esta aplicación web interactiva estilo Single Page Aplication (SPA), desarrollada con **Streamlit**, permite cargar datos de ventas, realizar un análisis exploratorio y generar predicciones de ventas utilizando modelos de series temporales y aprendizaje automático.
 
