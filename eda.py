@@ -20,19 +20,28 @@ def cargar_datos(uploaded_file):
         st.error(f"Ocurrió un error al cargar el archivo: {str(e)}")
         return None
 
+def cargar_datos_predeterminados():
+    """Función para cargar el dataset por defecto y verificar el archivo CSV."""
+    data = pd.read_csv("data/ventas.csv", parse_dates=["Fecha"])
+    return data
 
 def app():
     st.title("Análisis Exploratorio de Datos (EDA)")
 
-    # Cargar archivo CSV
+    # Cargar archivo CSV o datos predeterminados
     uploaded_file = st.sidebar.file_uploader("Sube tu archivo CSV de ventas", type="csv")
-    if not uploaded_file:
-        st.warning("Por favor, sube un archivo CSV para comenzar.")
-        return
+    usar_predeterminados = st.sidebar.button("Usar datos predeterminados")
 
-    # Cargar datos y verificar integridad
-    data = cargar_datos(uploaded_file)
-    if data is None:
+    # Decidir si se usan datos subidos o predeterminados
+    if uploaded_file:
+        data = cargar_datos(uploaded_file)
+        if data is None:
+            return
+    elif usar_predeterminados:
+        data = cargar_datos_predeterminados()
+        st.success("Datos predeterminados cargados exitosamente.")
+    else:
+        st.warning("Por favor, sube un archivo CSV o usa los datos predeterminados para comenzar.")
         return
 
     # Mostrar las primeras filas de los datos
